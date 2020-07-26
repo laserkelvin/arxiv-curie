@@ -49,8 +49,12 @@ class ReplaceWhitespace(AbstractCleaningMethod):
     """
     Delete typical whitespace characters, including
     newline, tab, carriage return, and vertical tab characters.
+    
+    This function will return results in the same type as the inputs:
+    if a list of strings (i.e. sentences) are provided, a list of
+    strings with whitespaces removed will be returned.
     """
-    def __call__(self, text: Union[str, List[str]]) -> str:
+    def __call__(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
         if type(text) == list:
             return list(map(replace_whitespace, text))
         else:
@@ -75,3 +79,35 @@ def replace_whitespace(text: str) -> str:
     for character in ["\n", "\t", "\r", "\v"]:
         text = text.replace(character, "")
     return text
+
+
+class RemoveArxivUrl(AbstractCleaningMethod):
+    """
+    This function will return results in the same type as the inputs:
+    if a list of strings (i.e. multiple URLs) are provided, a list of
+    URLs with the arxiv part removed will be returned.
+    """
+    def __call__(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
+        if type(text) == list:
+            return list(map(remove_arxiv_url, text))
+        else:
+            return remove_arxiv_url(text)
+
+
+def remove_arxiv_url(text: str) -> str:
+    """
+    Remove the ArXiv URL boilerplate from a string. This is primarily
+    for truncating `pdf_url` from ArXiv queries for lightweight
+    saving.
+
+    Parameters
+    ----------
+    text : str
+        
+
+    Returns
+    -------
+    str
+        [description]
+    """
+    return text.replace("http://arxiv.org/pdf/", "")
