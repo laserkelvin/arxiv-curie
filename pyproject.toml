@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "arxiv-curie"
+name = "curie"
 version = "0.1.0"
 description = "Automated, machine learning driven scientific paper summarizer"
 authors = ["Kelvin Lee <kin.long.kelvin.lee@gmail.com>"]
@@ -12,6 +12,7 @@ scikit-learn = "^0.23.1"
 nltk = "^3.5"
 arxiv = "^0.5.3"
 gensim = "^3.8"
+tika = "^1.24"
 
 [tool.poetry.dev-dependencies]
 black = {version = "^19.10b0", allow-prereleases = true}
