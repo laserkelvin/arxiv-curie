@@ -59,7 +59,7 @@ class AbstractModel(ABC):
         loader = offline.OfflineReader()
         paths = loader.query(path)
         for paper in tqdm(loader.retrieve(paths)):
-            text = self._cleaner.to_sentence(paper)
+            text = self._cleaner.tokenize_sentence(paper)
             self._embedder.train(text, epochs=1)
         ```
 
@@ -71,7 +71,7 @@ class AbstractModel(ABC):
     def summarize_pdf(self, path: str) -> str:
         text = parser.from_file(path)["content"]
         # generate sentences and clean
-        text = self._cleaner.to_sentence(text)
+        text = self._cleaner.tokenize_sentence(text)
         vectors = self._embedder.sentence_embedding(text)
         summary = self._summarizer.predict(vectors)
         return summary

@@ -16,13 +16,33 @@ class ArxivCurie(base.AbstractModel):
         self._cleaner = nltk.NLTKCleaner()
         self._embedder = CW2V()
 
+    @property
+    def loader(self):
+        return self._loader
+
+    @property
+    def cleaner(self):
+        return self._cleaner
+
+    @property
+    def embedder(self):
+        return self._embedder
+
+    @property
+    def summarizer(self):
+        pass
+
+    @property
+    def name(self):
+        return self.__name__
+
     def online_training(
         self, query: str, max_results=1000, epochs=5, load_kwargs={}
     ) -> None:
         self._loader.query(query, max_results, **load_kwargs)
         for paper in tqdm(self._loader.retrieve()):
             # extract sentences from paper, and clean
-            text = self._cleaner.to_sentence(paper)
+            text = self._cleaner.tokenize_sentence(paper)
             self._embedder.build_vocab(text, update=True)
             self._embedder.train(text, epochs=epochs, total_examples=len(text))
 
@@ -44,12 +64,12 @@ class ArxivCurie(base.AbstractModel):
         loader = offline.OfflineReader()
         paths = loader.query(path)
         for paper in tqdm(loader.retrieve(paths)):
-            text = self._cleaner.to_sentence(paper)
+            text = self._cleaner.tokenize_sentence(paper)
             self._embedder.build_vocab(text, update=True)
             self._embedder.train(text, epochs=epochs, total_examples=len(text))
 
     def summarize_pdf(self, path: str) -> str:
         text = self._loader.read_pdf(path)
-        text = self._cleaner.to_sentence(text)
+        text = self._cleaner.tokenize_sentence(text)
         embeddings = self._embedder.sentence_embedding(text)
         return embeddings

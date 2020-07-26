@@ -8,11 +8,18 @@ from curie.cleaners import base as clean_base
 
 
 class ArxivReader(base.AbstractLoader):
+
+    __name__ = "ArxivReader"
+
     def __init__(self, keep=False):
         super().__init__()
         self.keep = keep
         self.urls = list()
-        self.results = list()
+        self._results = list()
+
+    @property
+    def results(self):
+        return self._results
 
     def query(
         self,
@@ -31,11 +38,11 @@ class ArxivReader(base.AbstractLoader):
             iterative=iterative,
             **kwargs,
         )
-        self.urls = [result.get("url") for result in self.results]
+        self.urls = [result.get("url") for result in self._results]
         self.urls = [clean_base.remove_arxiv_url(url) for url in self.urls]
 
     def retrieve(self):
-        results = iter(self.results)
+        results = iter(self._results)
         if self.keep:
             save_dir = Path.cwd()
         else:

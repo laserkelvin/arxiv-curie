@@ -6,7 +6,11 @@ from curie.loaders import base
 class OfflineReader(base.AbstractLoader):
     def __init__(self):
         super().__init__()
-        self.results = list()
+        self._results = list()
+
+    @property
+    def results(self):
+        return self._results
 
     def query(self, path: str):
         paths = Path(path).rglob("*.pdf")

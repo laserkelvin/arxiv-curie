@@ -12,15 +12,19 @@ class NLTKCleaner(base.AbstractCleaner):
             pipeline = [base.ReplaceWhitespace()]
         self._pipeline = pipeline
 
+    @property
+    def pipeline(self):
+        return self._pipeline
+
     def clean(self, text: str) -> str:
         for func in self._pipeline:
             text = func(text)
         return text
 
-    def to_sentence(self, text: str) -> List[str]:
+    def tokenize_sentence(self, text: str) -> List[str]:
         text = tokenize.sent_tokenize(text)
         return self.clean(text)
 
-    def to_words(self, text: str) -> List[str]:
+    def tokenize_word(self, text: str) -> List[str]:
         text = tokenize.word_tokenize(text)
         return self.clean(text)

@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from abc import ABC, abstractmethod, abstractstaticmethod
+from abc import ABC, abstractmethod
 
 
 class AbstractCleaner(ABC):
@@ -17,8 +17,8 @@ class AbstractCleaner(ABC):
         """
         return self._pipeline
 
-    @abstractstaticmethod
-    def tokenize_sentence(text: str) -> str:
+    @abstractmethod
+    def tokenize_sentence(self, text: str) -> str:
         raise NotImplementedError
 
     @abstractmethod
