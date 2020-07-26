@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 from tika import parser
@@ -10,12 +9,12 @@ class OfflineReader(base.AbstractLoader):
     def __init__(self):
         super().__init__()
         self.results = list()
-    
+
     def query(self, path: str):
         paths = Path(path).rglob("*.pdf")
         self.results = paths
         return paths
-    
+
     def retrieve(self, paths=None):
         if paths is None:
             paths = self.results

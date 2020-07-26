@@ -1,4 +1,3 @@
-
 from nltk import tokenize
 
 from curie.curie.cleaners import base

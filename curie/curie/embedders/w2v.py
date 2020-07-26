@@ -1,4 +1,3 @@
-
 from typing import List
 
 from gensim.models import Word2Vec
@@ -80,4 +79,3 @@ class CW2V(Word2Vec):
         """
         vectors = np.vstack([self.wv.get_vector(word) for word in text])
         return np.average(vectors, axis=1)
-        

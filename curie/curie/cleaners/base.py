@@ -1,7 +1,7 @@
-
 from typing import List, Union
 
 from abc import ABC, abstractmethod, abstractstaticmethod
+
 
 class AbstractCleaner(ABC):
     @abstractmethod
@@ -38,7 +38,7 @@ class RemoveCharacters(AbstractCleaningMethod):
     def __init__(self, *characters):
         super().__init__()
         self.characters = characters
-    
+
     def __call__(self, text: str) -> str:
         for character in self.characters:
             text = text.replace(character, "")
@@ -54,6 +54,7 @@ class ReplaceWhitespace(AbstractCleaningMethod):
     if a list of strings (i.e. sentences) are provided, a list of
     strings with whitespaces removed will be returned.
     """
+
     def __call__(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
         if type(text) == list:
             return list(map(replace_whitespace, text))
@@ -87,6 +88,7 @@ class RemoveArxivUrl(AbstractCleaningMethod):
     if a list of strings (i.e. multiple URLs) are provided, a list of
     URLs with the arxiv part removed will be returned.
     """
+
     def __call__(self, text: Union[str, List[str]]) -> Union[str, List[str]]:
         if type(text) == list:
             return list(map(remove_arxiv_url, text))

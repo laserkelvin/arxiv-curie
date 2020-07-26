@@ -8,6 +8,7 @@ The idea is to organize different methodologies into submodules, for example
 in a `word2vec` module that wraps `gensim.models.word2vec`for our purposes.
 """
 
+
 class Curie(object):
     """
     Main interaction class for `arxiv-curie`. Basically combines the three
@@ -20,6 +21,7 @@ class Curie(object):
     object : [type]
         [description]
     """
+
     def __init__(self, reader, embedder, summarizer):
         super().__init__()
         self._reader = reader

@@ -1,4 +1,3 @@
-
 from abc import ABC, abstractmethod
 
 from curie.curie.loaders import offline
@@ -15,12 +14,12 @@ class AbstractModel(ABC):
     performs all of the functionality, from reading in text to making
     predictions.
     """
-    
+
     @property
     @abstractmethod
     def name(self):
         return self.__name__
-    
+
     @property
     @abstractmethod
     def loader(self):

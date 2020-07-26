@@ -1,4 +1,3 @@
-
 from abc import ABC, abstractmethod
 
 
@@ -21,7 +20,7 @@ class AbstractSummarizer(ABC):
             Summarized text.
         """
         raise NotImplementedError
-    
+
     def __call__(self, text: str) -> str:
         return self.summarize(text)
 
@@ -31,6 +30,7 @@ class ExtractiveSummarizer(AbstractSummarizer):
     Base class for extractive summarizers. This method of summarization
     re-uses text verbatim, and is not generative.
     """
+
     def __init__(self, n_sentences=10):
         super().__init__()
         self.n_sentences = n_sentences
@@ -46,6 +46,7 @@ class AbstractiveSummarizer(AbstractSummarizer):
     This is more of a TODO class, and some methods relying on deep learning
     will be implemented.
     """
+
     def __init__(self, model):
         super().__init__()
         self.model = model

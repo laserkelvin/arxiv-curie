@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -34,11 +33,9 @@ class ArxivReader(base.AbstractLoader):
             iterative=iterative,
             **kwargs,
         )
-        self.urls = [
-            result.get("url") for result in self.results
-        ]
+        self.urls = [result.get("url") for result in self.results]
         self.urls = [clean_base.remove_arxiv_url(url) for url in self.urls]
-    
+
     def retrieve(self):
         results = iter(self.results)
         if self.keep:

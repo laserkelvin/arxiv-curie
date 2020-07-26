@@ -1,4 +1,3 @@
-
 """
 base.py
 
@@ -13,12 +12,12 @@ from abc import ABC, abstractmethod
 from tika import parser
 
 
-class AbstractLoader(ABC):   
+class AbstractLoader(ABC):
     @property
     @abstractmethod
     def results(self):
         raise NotImplementedError
-     
+
     @abstractmethod
     def query(self, query: str, max_results=200, keep=False):
         """
