@@ -1,7 +1,7 @@
-from curie.curie.models import base
-from curie.curie.loaders import arxiv, offline
-from curie.curie.cleaners import nltk
-from curie.curie.embedders.w2v import CW2V
+from curie.models import base
+from curie.loaders import arxiv, offline
+from curie.cleaners import nltk
+from curie.embedders.w2v import CW2V
 
 from tqdm import tqdm
 

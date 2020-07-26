@@ -3,8 +3,8 @@ from tempfile import TemporaryDirectory
 
 import arxiv
 
-from curie.curie.loaders import base
-from curie.curie.cleaners import base as clean_base
+from curie.loaders import base
+from curie.cleaners import base as clean_base
 
 
 class ArxivReader(base.AbstractLoader):

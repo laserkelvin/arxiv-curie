@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from curie.curie.loaders import base
+from curie.loaders import base
 
 
 class OfflineReader(base.AbstractLoader):

@@ -2,7 +2,7 @@ from typing import List
 
 from nltk import tokenize
 
-from curie.curie.cleaners import base
+from curie.cleaners import base
 
 
 class NLTKCleaner(base.AbstractCleaner):
