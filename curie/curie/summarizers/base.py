@@ -42,7 +42,7 @@ class AbstractiveSummarizer(AbstractSummarizer):
     is significantly more complex than `ExtractiveSummarizer`, requiring
     a model of sorts that can extract semanticity from text and generate
     new text.
-    
+
     This is more of a TODO class, and some methods relying on deep learning
     will be implemented.
     """

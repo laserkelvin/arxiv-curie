@@ -5,6 +5,9 @@ import numpy as np
 
 
 class CW2V(Word2Vec):
+
+    MAX_WORDS_IN_BATCH = 200
+
     def __init__(
         self,
         sentences=None,

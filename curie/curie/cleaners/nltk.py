@@ -1,3 +1,5 @@
+from typing import List
+
 from nltk import tokenize
 
 from curie.curie.cleaners import base
@@ -15,10 +17,10 @@ class NLTKCleaner(base.AbstractCleaner):
             text = func(text)
         return text
 
-    def to_sentence(self, text: str) -> str:
+    def to_sentence(self, text: str) -> List[str]:
         text = tokenize.sent_tokenize(text)
         return self.clean(text)
 
-    def to_words(self, text: str) -> str:
+    def to_words(self, text: str) -> List[str]:
         text = tokenize.word_tokenize(text)
         return self.clean(text)

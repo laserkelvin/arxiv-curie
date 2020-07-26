@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from tika import parser
-
 from curie.curie.loaders import base
 
 

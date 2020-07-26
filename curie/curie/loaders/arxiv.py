@@ -2,7 +2,6 @@ from pathlib import Path
 from tempfile import TemporaryDirectory
 
 import arxiv
-from tika import parser
 
 from curie.curie.loaders import base
 from curie.curie.cleaners import base as clean_base
@@ -24,7 +23,6 @@ class ArxivReader(base.AbstractLoader):
         iterative=False,
         **kwargs
     ):
-        path = TemporaryDirectory()
         self.results = arxiv.query(
             query,
             max_results=max_results,

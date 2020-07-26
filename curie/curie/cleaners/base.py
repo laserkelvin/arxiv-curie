@@ -49,7 +49,7 @@ class ReplaceWhitespace(AbstractCleaningMethod):
     """
     Delete typical whitespace characters, including
     newline, tab, carriage return, and vertical tab characters.
-    
+
     This function will return results in the same type as the inputs:
     if a list of strings (i.e. sentences) are provided, a list of
     strings with whitespaces removed will be returned.
@@ -105,7 +105,6 @@ def remove_arxiv_url(text: str) -> str:
     Parameters
     ----------
     text : str
-        
 
     Returns
     -------

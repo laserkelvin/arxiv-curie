@@ -4,9 +4,6 @@ base.py
 This module defines base classes for readers.
 """
 
-from pathlib import Path
-from typing import List, Union
-
 from abc import ABC, abstractmethod
 
 from tika import parser

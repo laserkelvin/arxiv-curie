@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
 
-from curie.curie.loaders import offline
-
 from tika import parser
-from joblib import dump, load
-from tqdm import tqdm
+from joblib import dump
 
 
 class AbstractModel(ABC):
@@ -44,7 +41,7 @@ class AbstractModel(ABC):
         and uses it to train/evaluate.
         """
 
-    def save(self, path=None):
+    def save(self, path=None) -> None:
         if not path:
             path = self.name
         if ".pkl" not in path:
@@ -52,12 +49,24 @@ class AbstractModel(ABC):
         dump(self, path)
         print(f"Saved model to {path}.")
 
-    def offline_training(self, path: str):
+    @abstractmethod
+    def offline_training(self, path: str) -> None:
+        """
+        Implement a training module for offline use: the abstract
+        code looks something like this,
+
+        ```
         loader = offline.OfflineReader()
         paths = loader.query(path)
         for paper in tqdm(loader.retrieve(paths)):
             text = self._cleaner.to_sentence(paper)
-            self._embedder.train(text, **embed_kwargs)
+            self._embedder.train(text, epochs=1)
+        ```
+
+        Basically load a PDF, parse and clean text, then train the
+        embedder.
+        """
+        raise NotImplementedError
 
     def summarize_pdf(self, path: str) -> str:
         text = parser.from_file(path)["content"]
