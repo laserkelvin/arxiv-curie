@@ -49,5 +49,5 @@ class AbstractLoader(ABC):
         str
             Parsed content of a PDF file
         """
-        paper = parser.from_text(path)
+        paper = parser.from_file(path)
         return paper["content"]

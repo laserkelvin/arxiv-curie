@@ -1,12 +1,17 @@
 from typing import List
 
+from gensim.models.word2vec_inner import MAX_WORDS_IN_BATCH
 from gensim.models import Word2Vec
 import numpy as np
 
 
 class CW2V(Word2Vec):
-
-    MAX_WORDS_IN_BATCH = 200
+    """
+    Wrapper for the Word2Vec model in `gensim`. The only modifications
+    made with this class are functions that try to homogenize the API
+    in terms of the callables, so that other embedding models can be
+    used in the same way (a la `sklearn`)
+    """
 
     def __init__(
         self,
@@ -82,3 +87,21 @@ class CW2V(Word2Vec):
         """
         vectors = np.vstack([self.wv.get_vector(word) for word in text])
         return np.average(vectors, axis=1)
+
+    def process_sentences(self, text: List[List[str]]) -> List[np.ndarray]:
+        """
+        Computes embedding vectors for a list of sentences (which in itself
+        are lists of words).
+
+        Parameters
+        ----------
+        text : List[List[str]]
+            Nested lists of words within lists of sentences
+
+        Returns
+        -------
+        List[np.ndarray]
+            Sentence vectors for every sentence
+        """
+        vectors = list(map(self.sentence_embedding, text))
+        return vectors

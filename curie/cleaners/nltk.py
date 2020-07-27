@@ -28,3 +28,6 @@ class NLTKCleaner(base.AbstractCleaner):
     def tokenize_word(self, text: str) -> List[str]:
         text = tokenize.word_tokenize(text)
         return self.clean(text)
+
+    def __call__(self, text: str) -> List[str]:
+        return self.tokenize_sentence(text)
